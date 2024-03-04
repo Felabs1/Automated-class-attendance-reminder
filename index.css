@@ -1,0 +1,13 @@
+.bottom-bar {
+  display: flex;
+}
+
+.bottom-bar a {
+  flex: 1;
+}
+
+th,
+td {
+  text-align: center;
+  padding: 12px;
+}
