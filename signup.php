@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="background-wallpaper" style="position: relative;
-  background-image: url('../images/loginwallpaper.jpg');
+  background-image: url('./images/loginwallpaper.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
