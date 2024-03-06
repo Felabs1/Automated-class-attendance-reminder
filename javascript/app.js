@@ -8,21 +8,19 @@ function register() {
   var course = document.getElementById("course");
   var year = document.getElementById("year");
 
-  if(email.value == ""){
+  if (email.value == "") {
     alert("please enter email");
     email.classList.add("w3-border-red");
-    return
+    return;
   }
-
-  
 
   let request = new XMLHttpRequest();
   request.open("POST", "./backend/connection.php?registerStudent=true");
   request.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      if(this.responseText == "admission_exist"){
-        alert('admission exist');
-        admission.classList.add('w3-border-red');
+      if (this.responseText == "admission_exist") {
+        alert("admission exist");
+        admission.classList.add("w3-border-red");
       }
     }
   };
@@ -33,14 +31,16 @@ function register() {
 }
 
 function login() {
-  console.log("hello");
+  let username = document.getElementById("username");
+  let password = document.getElementById("password");
+
   // ids to be captured for validation purposes
   // the validations to be made here
   // agax xmlHttpRequest
   let request = new XMLHttpRequest();
   request.open("POST", "./backend/connection.php?loginStudent=true");
-  request.onreadyStateChange = function () {
-    if ((this.readyState = 4 && this.status == 200)) {
+  request.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
       console.log(this.responseText);
     }
   };

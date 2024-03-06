@@ -45,9 +45,19 @@ if(isset($_GET["registerStudent"])){
 
 if (isset($_GET['loginStudent'])){
     $admission = $_POST['username'];
-    $fetch = $crud->fetch_data("select * from students where admission = '$admission'");
+    $password = $_POST['password'];
+    $fetch = $crud->fetch_data("select * from students where admNo = '$admission'");
     if(count($fetch) > 0){
-        echo $fetch[0]["names"];
+        if(password_verify($password,$fetch[0]["password"])){
+            $_SESSION['admission'] = $fetch[0]['admNo'];
+            // input other session variables here;
+            echo "login_success";
+        }else{
+            echo password_hash($password, PASSWORD_DEFAULT);
+            echo "incorrect_password";
+        }
+    }else{
+        echo "no_user_found";
     }
 }
 
