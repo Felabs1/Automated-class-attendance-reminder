@@ -24,7 +24,7 @@ if(isset($_GET["registerStudent"])){
     $fetch = $crud->fetch_data("select * from students where admNo = '$admission'");
 
     if(count($fetch) > 0){
-        echo "admission_exist";
+        echo "admission_exists";
     }else{
 
         // crud function to insert data in the database
