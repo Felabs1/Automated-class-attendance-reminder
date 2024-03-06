@@ -33,7 +33,7 @@
     <br><br>
     <br><br>
             <div class="w3-auto" style="width: 30rem">
-            <div class="w3-card w3-round w3-white w3-padding">
+            <form id="frmLogin" class="w3-card w3-round w3-white w3-padding">
             <h4>Login</h4>
             <hr>
             <label for="">username</label>
@@ -41,14 +41,14 @@
             <label for="">password</label>
             <input type="password" name="password" id="password" class="w3-input w3-border w3-round">
             <br>
-            <button class="w3-button w3-purple w3-block w3-round">Login</button>
+            <button class="w3-button w3-purple w3-block w3-round" type="button" onclick="login()">Login</button>
 
-        </div>
+        </form>
         </div>
         </div>
      </div>
         
-    
+    <script src="./javascript/app.js"></script>
     
 </body>
 </html>

@@ -9,30 +9,13 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="w3-bar w3-text-purple w3-padding">
-        <div class="w3-auto">
-        <span class="w3-large"><span class="w3-hide-small">Automated Class attendance reminder</span>(ACAR)</span>
-        <div class="w3-right w3-hide-small" >
-            <a href="./index.php" class="w3-bar-item w3-padding"><i class="fa fa-home"></i>&nbsp;Home</a>
-            <a href="./index.php" class="w3-bar-item w3-padding"><i class="fa fa-bell"></i>&nbsp;Notifications</a>
-            <a href="./index.php" class="w3-bar-item w3-padding"><i class="fa fa-cog"></i>&nbsp;settings</a>
-            <a href="./index.php" class="w3-bar-item w3-padding"><i class="fa fa-sign-out"></i>&nbsp;Log out</a>
-        </div>
-        <div style="display: flex" class="w3-bottom w3-hide-medium w3-hide-large bottom-nav w3-bar" >
-        <hr>
-        <a href="./index.php" style="flex: 1" class="w3-bar-item w3-large w3-padding"><i class="fa fa-home"></i></a>
-            <a href="./index.php" style="flex: 1" class="w3-bar-item w3-large w3-padding"><i class="fa fa-bell"></i></a>
-            <a href="./index.php" style="flex: 1" class="w3-bar-item w3-large w3-padding"><i class="fa fa-cog"></i></a>
-            <a href="./index.php" style="flex: 1" class="w3-bar-item w3-large w3-padding"><i class="fa fa-sign-out"></i></a>
-        </div>
-        </div>
-        
-    </div>
-
+    <?php require("./navigation.php"); ?>
+<br>
     <div class="w3-auto">
+        <h1 style="font-weight: bold">Good Evening, <span class="w3-text-purple">Admin</span></h1>
         <div class="w3-row-padding w3-stretch">
             <div class="w3-col l6">
-            <div class="w3-border w3-round">
+            <div class="w3-white w3-round">
             <div style="display: flex">
                 <img src="./images/loginwallpaper.jpg" style="width: 200px; height: 200px;" alt="" srcset="">
                 <div class="w3-padding"><h2>March</h2></div>
@@ -99,6 +82,36 @@
                 </tr>
             </table>
         </div>
+            </div>
+            <div class="w3-col l6">
+                <div class="w3-row-padding">
+                    <h3>Todays Schedule,</h3>
+                <div class="w3-col l6">
+                        <div class="w3-padding w3-purple">
+                            <span class="w3-large">CIR 112</span><br>
+                            <span>Software Development
+                            </span>
+                            <p><small>TB2 12:00PM - 1:00PM</small></p>
+                        </div>
+                    </div>
+                    <div class="w3-col l6">
+                        <div class="w3-padding w3-purple">
+                            <span class="w3-large">CIR 112</span><br>
+                            <span>Software Development
+                            </span>
+                            <p><small>TB2 12:00PM - 1:00PM</small></p>
+                        </div>
+                    </div>
+                    
+                </div>
+                <br>
+                <div class="w3-padding">
+                <button class="w3-button w3-purple w3-round">
+                    Manage
+                </button>
+                </div>
+               
+                
             </div>
         </div>
         

@@ -1,0 +1,45 @@
+<?php
+session_start();
+include "crud.php";
+$crud = new Crud("127.0.0.1", "root", "", "acar");
+
+// if($crud->conn->connect_error){
+//     echo "error in connection";
+// }else{
+//     echo "success";
+// }
+
+if(isset($_GET["registerStudent"])){
+    
+    // initialization of variables that were called from the client
+    $email = $_POST['email'];
+    $admission = $_POST['admission'];
+    $password = $_POST['password'];
+    $names = $_POST['names'];
+    $phoneNumber = $_POST['phoneNumber'];
+    $course = $_POST['course'];
+    $year = $_POST['year'];
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+    // crud function to insert data in the database
+    $insert = $crud->insert_data("students", ["admNo" => $admission, "courseName"=>$course, "names" => $names, "courseCode" => $course, "email" => $email, "phoneNo" => $phoneNumber, "password" => $hashed_password]);
+    
+    // what happens next if the insertion was successful otherwise issue a failure error
+    if ($insert) {
+        echo "successful";
+    }else{
+        echo "some error occured";
+        echo $crud->conn->error;
+    }
+}
+
+if (isset($_GET['loginStudent'])){
+    $admission = $_POST['username'];
+    $fetch = $crud->fetch_data("select * from students where admission = '$admission'");
+    if(count($fetch) > 0){
+        echo $fetch[0]["names"];
+    }
+}
+
+
+?>

@@ -6,8 +6,20 @@
   flex: 1;
 }
 
+body {
+  background-color: #ffeeff77;
+}
+
 th,
 td {
   text-align: center;
   padding: 12px;
+}
+
+.w3-col div {
+  margin-bottom: 12px;
+}
+
+input {
+  margin-bottom: 10px;
 }
