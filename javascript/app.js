@@ -14,18 +14,55 @@ function register() {
     return
   }
 
+  if(names.value == ""){
+    alert('please enter names');
+    names.classList.add('w3-border-red');
+    return;
+  }
+
+
+  if(password.value == ""){
+    alert('please enter password');
+    password.classList.add("w3-border-red");
+    return;
+  }
+
+  if(admission.value == ""){
+    alert('please enter admission');
+    admission.classList.add("w3-border-red");
+    return;
+  }
+
+  if(phoneNumber.value == ""){
+    alert('please enter phoneNumber');
+    phoneNumber.classList.add("w3-border-red");
+    return;
+  }
+
+
+
   
+  // comunicating with the server
 
   let request = new XMLHttpRequest();
   request.open("POST", "./backend/connection.php?registerStudent=true");
   request.onreadystatechange = function () {
+    // connection to the server is working
     if (this.readyState == 4 && this.status == 200) {
-      if(this.responseText == "admission_exist"){
+
+      if(this.responseText == "admission_exists"){
         alert('admission exist');
         admission.classList.add('w3-border-red');
+      }else if(this.responseText == "successful"){
+        alert('registration succesful');
+        window.location.href = "./login.php";
+      }else{
+        alert("some error occured");
       }
     }
   };
+
+
 
   let myform = document.getElementById("signupForm");
   let formData = new FormData(myform);
