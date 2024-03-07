@@ -11,7 +11,7 @@
 <body>
     <?php require("./navigation.php"); ?>
     <div class="w3-auto" style="width: 30rem">
-        <div class="w3-white w3-padding w3-round-large">
+        <form id="frmaddcourse" class="w3-white w3-padding w3-round-large">
             <h3>add course</h3>
             <hr>
             <label for="">course code</label>
@@ -19,9 +19,9 @@
             <label for="">course Name</label>
             <input class="w3-input w3-border w3-round" name="course_name" id="course_name"/>
             <br>
-            <button class="w3-button w3-purple w3-round">Add</button>
-        </div>
+            <button class="w3-button w3-purple w3-round" type="button" onclick="addCourse()">Add</button>
+        </form>
     </div>
-    
+    <script src="./javascript/app.js"></script>
 </body>
 </html>

@@ -53,11 +53,29 @@ if (isset($_GET['loginStudent'])){
             // input other session variables here;
             echo "login_success";
         }else{
-            echo password_hash($password, PASSWORD_DEFAULT);
+            // echo password_hash($password, PASSWORD_DEFAULT);
             echo "incorrect_password";
         }
     }else{
         echo "no_user_found";
+    }
+}
+
+if (isset($_GET["addCourse"])){
+    $courseCode = $_POST['course_code'];
+    $courseName = $_POST['course_name'];
+
+    $fetch = $crud->fetch_data("select * from courseRegistration where courseCode = '$courseCode'");
+    if(count($fetch) > 0){
+        echo "course_exist";
+    }else{
+        $insert = $crud->insert_data("courseRegistration", ["courseName" => $courseName, "courseCode" => $courseCode]);
+        if ($insert){
+            echo "success";
+        }else{
+            echo "some error occured ".$crud->conn->error;
+        }
+        
     }
 }
 
