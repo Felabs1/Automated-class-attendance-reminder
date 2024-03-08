@@ -35,7 +35,7 @@
                     <h3><i class="fa fa-bell w3-text-purple">&nbsp;</i>Reminder
                     </h3>
                     <hr>
-                    <button class="w3-button w3-purple w3-round">Create</button>
+                    <a href="reminder.php" class="w3-button w3-purple w3-round">Create</a>
                     <button class="w3-button w3-purple w3-round">Manage Reminder</button>
                 </div>
             </div>

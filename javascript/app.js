@@ -8,8 +8,13 @@ function register() {
   var course = document.getElementById("course");
   var year = document.getElementById("year");
 
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   if (email.value == "") {
     alert("please enter email");
+    email.classList.add("w3-border-red");
+    return;
+  } else if (emailPattern.test(email.value) == false) {
+    alert("please enter a valid email");
     email.classList.add("w3-border-red");
     return;
   }
@@ -90,7 +95,7 @@ function login() {
       console.log(this.responseText);
       if (this.responseText == "login_success") {
         alert("login successful");
-        window.location.href("./index.php");
+        window.location.href = "./index.php";
       } else if (this.responseText == "incorrect_password") {
         alert("please enter the correct password");
       } else if (this.responseText == "no_user_found") {
@@ -129,13 +134,10 @@ function addCourse() {
   request.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       console.log(this.responseText);
-      if (this.responseText == "login_success") {
-        alert("login successful");
-        window.location.href("./index.php");
-      } else if (this.responseText == "incorrect_password") {
-        alert("please enter the correct password");
-      } else if (this.responseText == "no_user_found") {
-        alert("the admission number you entered does not exist");
+      if (this.responseText == "course_exist") {
+        alert("the course code allready exist");
+      } else if (this.responseText == "success") {
+        alert("course registered successfully");
       } else {
         alert("internal server error");
         console.error(this.responseText);
@@ -144,7 +146,94 @@ function addCourse() {
   };
 
   // sending data from the login form
-  let myForm = document.getElementById("frmLogin");
+  let myForm = document.getElementById("frmaddcourse");
   let formData = new FormData(myForm);
+  request.send(formData);
+}
+
+function addUnit() {
+  let unitCode = document.getElementById("unit_code");
+  let unitName = document.getElementById("unitName");
+
+  if (unitCode.value == "") {
+    alert("please enter the unit code");
+    return;
+  }
+
+  if (unitName.value == "") {
+    alert("please enter the unit name");
+    return;
+  }
+
+  let request = new XMLHttpRequest();
+  request.open("POST", "./backend/connection.php?addunit=true");
+  request.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log(this.responseText);
+      if (this.responseText == "course_exist") {
+        alert("the course code allready exist");
+      } else if (this.responseText == "success") {
+        alert("course registered successfully");
+      } else {
+        alert("internal server error");
+        console.error(this.responseText);
+      }
+    }
+  };
+
+  // sending data from the login form
+  let myForm = document.getElementById("frmaddunit");
+  let formData = new FormData(myForm);
+  request.send(formData);
+}
+
+function addReminder() {
+  var unit = document.getElementById("unit");
+  var time = document.getElementById("time");
+  var venue = document.getElementById("venue");
+  var group = document.getElementById("group");
+  var day_of_the_week = document.getElementById("day_of_the_week");
+
+  // validations
+  if (unit.value == "") {
+    alert("please enter the unit name");
+    unit.classList.add("w3-border-red");
+    return;
+  }
+
+  if (time.value == "") {
+    alert("please enter time");
+    time.classList.add("w3-border-red");
+    return;
+  }
+
+  if (venue.value == "") {
+    alert("please enter venue");
+    venue.classList.add("w3-border-red");
+    return;
+  }
+
+  if (group.value == "") {
+    alert("please enter group");
+    group.classList.add("w3-border-red");
+    return;
+  }
+
+  if (day_of_the_week.value == "") {
+    alert("please enter the day of the week");
+    day_of_the_week.classList.add("w3-border-red");
+    return;
+  }
+
+  let request = new XMLHttpRequest();
+  request.open("POST", "./backend/connection.php?addReminder=true");
+  request.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log(this.responseText);
+    }
+  };
+
+  let form = document.getElementById("reminder");
+  let formData = new FormData(form);
   request.send(formData);
 }

@@ -79,5 +79,45 @@ if (isset($_GET["addCourse"])){
     }
 }
 
+if (isset($_GET["addUnit"])){
+    $unit_code = $_POST["unit_code"];
+    $unit_name = $_POST["unit_name"];
+    $course = $_POST["course"];
+
+    $fetch = crud->fetch_data("select * from unitregistration where unitCode = '$unit_code'");
+    if(count($fetch) > 0){
+        echo "unit_code_exist";
+    }else{
+        $insert = $crud->insert_data("unitregistration", ["unitName"=>$unit_name, "unitCode"=> $unit_code, "course" => $course]);
+        if($insert){
+            echo "successful";
+        }else{
+            echo "some error occured";
+        }
+    
+    }
+}
+
+
+if(isset($_GET['addReminder'])){
+    $unit = $_POST["unit"];
+    $time = $_POST["time"];
+    $venue = $_POST["venue"];
+    $group = $_POST["group"];
+    $day_of_the_week = $_POST["day_of_the_week"];
+    $fetch = $crud->fetch_data("select * from reminders where unit = '$unit' and time='$time' and dayOfTheWeek = '$day_of_the_week'");
+    if(count($fetch) > 0){
+        echo "lecturers_clashing";
+    }else{
+        $insert = $crud->insert_data("reminders", ["unit" => $unit, "time" => $time, "venue" => $venue, "group" => $group, "dayOfThe
+        week" => $day_of_the_week]);
+        if($insert){
+            echo "successfull";
+        }else{
+            echo "some_error_occured";
+        }
+    }
+}
+
 
 ?>

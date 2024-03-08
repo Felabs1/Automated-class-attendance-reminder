@@ -11,22 +11,22 @@
 <body>
     <?php require("./navigation.php"); ?>
     <div class="w3-auto" style="width: 30rem">
-        <div class="w3-white w3-padding w3-round-large">
+        <form id="frmaddunit" class="w3-white w3-padding w3-round-large">
             <h3>add Unit</h3>
             <hr>
             <label for="">Unit Code</label>
-            <input class="w3-input w3-border w3-round" name="course_code" id="course_code"/>
+            <input class="w3-input w3-border w3-round" name="unit_code" id="unit_code"/>
             <label for="">Unit Name</label>
-            <input class="w3-input w3-border w3-round" name="course_name" id="course_name"/>
+            <input class="w3-input w3-border w3-round" name="unit_name" id="unit_name"/>
             <label for="">Course</label>
-            <select class="w3-select w3-border w3-round">
+            <select class="w3-select w3-border w3-round" id="course" name="course">
                 <option value="ccs">Computer Science</option>
             </select>
             <br>
             <br>
-            <button class="w3-button w3-purple w3-round">Add</button>
-        </div>
+            <button class="w3-button w3-purple w3-round" onclick="addUnit()">Add</button>
+        </form>
     </div>
-    
+    <script src="./javascript/app.js"></script>
 </body>
 </html>
