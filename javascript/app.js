@@ -1,3 +1,7 @@
+const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const admissionPattern = /^[A-Z]{3}\/\\d{5}\/\\d{3}$/;
+const fullNamePattern = /^[A-Z][a-z]* [A-Z][a-z]*$/;
+
 function register() {
   //   alert("hello world");
   var email = document.getElementById("email");
@@ -8,7 +12,6 @@ function register() {
   var course = document.getElementById("course");
   var year = document.getElementById("year");
 
-  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   if (email.value == "") {
     alert("please enter email");
     email.classList.add("w3-border-red");
@@ -21,6 +24,10 @@ function register() {
 
   if (names.value == "") {
     alert("please enter names");
+    names.classList.add("w3-border-red");
+    return;
+  } else if (fullNamePattern.test(names.value)) {
+    alert("please enter a valid name");
     names.classList.add("w3-border-red");
     return;
   }
@@ -153,7 +160,7 @@ function addCourse() {
 
 function addUnit() {
   let unitCode = document.getElementById("unit_code");
-  let unitName = document.getElementById("unitName");
+  let unitName = document.getElementById("unit_name");
 
   if (unitCode.value == "") {
     alert("please enter the unit code");
