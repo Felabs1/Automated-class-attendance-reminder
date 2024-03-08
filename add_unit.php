@@ -24,7 +24,7 @@
             </select>
             <br>
             <br>
-            <button class="w3-button w3-purple w3-round" onclick="addUnit()">Add</button>
+            <button type="button" class="w3-button w3-purple w3-round" onclick="addUnit()">Add</button>
         </form>
     </div>
     <script src="./javascript/app.js"></script>
