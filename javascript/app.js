@@ -177,13 +177,13 @@ function addUnit() {
   request.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       console.log(this.responseText);
-      if (this.responseText == "course_exist") {
+      if (this.responseText == "unit_code_exist") {
         alert("the course code allready exist");
-      } else if (this.responseText == "success") {
+      } else if (this.responseText == "successfull") {
         alert("course registered successfully");
       } else {
         alert("internal server error");
-        console.error(this.responseText);
+        console.log(this.responseText);
       }
     }
   };
@@ -236,7 +236,15 @@ function addReminder() {
   request.open("POST", "./backend/connection.php?addReminder=true");
   request.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      console.log(this.responseText);
+      // console.log(this.responseText);
+      if (this.responseText == "successful") {
+        alert("reminder set successfully");
+      } else if (this.responseText == "lecturers_clashing") {
+        alert("lecturers clashing");
+      } else {
+        alert("some error occured");
+        console.log(this.responseText);
+      }
     }
   };
 

@@ -1,3 +1,12 @@
+<?php
+session_start();
+include("./backend/crud.php");
+$crud = new Crud("127.0.0.1", "root", "", "acar");
+$fetch = $crud->fetch_data("SELECT * FROM courseregistration");
+// echo $_SESSION['phone'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +29,14 @@
             <input class="w3-input w3-border w3-round" name="unit_name" id="unit_name"/>
             <label for="">Course</label>
             <select class="w3-select w3-border w3-round" id="course" name="course">
-                <option value="ccs">Computer Science</option>
+                <?php
+                foreach($fetch as $row){
+                    ?>
+                    <option value="<?php echo $row['courseCode']; ?>"><?php echo $row['courseName'] ?></option>
+
+                    <?php
+                }
+                 ?>
             </select>
             <br>
             <br>

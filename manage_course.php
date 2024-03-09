@@ -1,3 +1,11 @@
+<?php
+session_start();
+include("./backend/crud.php");
+$crud = new Crud("127.0.0.1", "root", "", "acar");
+$fetch = $crud->fetch_data("SELECT * FROM courseregistration");
+// echo $_SESSION['phone'];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,11 +31,19 @@
                 <th>course name</th>
                 <th>action</th>
             </tr>
-            <tr>
-                <td>CCS</td>
-                <td>computer Science</td>
-                <td><button class="w3-button w3-padding-small w3-grey w3-round">Edit</button>&nbsp;<button class="w3-button w3-padding-small w3-red w3-round">Delete</button></td>
-            </tr>
+            <?php
+            foreach($fetch as $row){
+
+                ?>
+                 <tr>
+                    <td><?php echo $row['courseCode']; ?></td>
+                    <td><?php echo $row['courseName']; ?></td>
+                    <td><button class="w3-button w3-padding-small w3-grey w3-round">Edit</button>&nbsp;<button class="w3-button w3-padding-small w3-red w3-round">Delete</button></td>
+                </tr>
+                <?php
+            }
+             ?>
+           
         </table>
     </div>
     <!-- <i class="fa fa-home"></i> -->

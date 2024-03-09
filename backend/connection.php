@@ -50,6 +50,10 @@ if (isset($_GET['loginStudent'])){
     if(count($fetch) > 0){
         if(password_verify($password,$fetch[0]["password"])){
             $_SESSION['admission'] = $fetch[0]['admNo'];
+            $_SESSION['phone'] = $fetch[0]['phoneNo'];
+            $_SESSION['courseName']  = $fetch[0]["courseName"];
+            $_SESSION['courseCode'] = $fetch[0]["courseCode"];
+            $_SESSION['email'] = $fetch[0]["email"];
             // input other session variables here;
             echo "login_success";
         }else{
@@ -79,12 +83,13 @@ if (isset($_GET["addCourse"])){
     }
 }
 
-if (isset($_GET["addUnit"])){
+if (isset($_GET["addunit"])){
     $unit_code = $_POST["unit_code"];
     $unit_name = $_POST["unit_name"];
     $course = $_POST["course"];
+    // echo $course;
 
-    $fetch = crud->fetch_data("select * from unitregistration where unitCode = '$unit_code'");
+    $fetch = $crud->fetch_data("select * from unitregistration where unitCode = '$unit_code'");
     if(count($fetch) > 0){
         echo "unit_code_exist";
     }else{
@@ -109,14 +114,29 @@ if(isset($_GET['addReminder'])){
     if(count($fetch) > 0){
         echo "lecturers_clashing";
     }else{
-        $insert = $crud->insert_data("reminders", ["unit" => $unit, "time" => $time, "venue" => $venue, "group" => $group, "dayOfThe
-        week" => $day_of_the_week]);
-        if($insert){
-            echo "successfull";
+        $sql = "INSERT INTO `reminders`(`unit`, `time`, `venue`, `group`, `dayOfTheWeek`, `lecturer_id`) VALUES ('$unit','$time','$venue','$group','$day_of_the_week','test')";
+        if($crud->conn->query($sql)){
+            echo "successful";
         }else{
             echo "some_error_occured";
         }
+
     }
+}
+
+if(isset($_GET['day'])){
+    // echo "{time: 1800}";
+    // $time = $_GET['time'];
+    $day = $_GET['day'];
+    // echo $day;
+    $fetch  = $crud->fetch_data("select * from reminders where dayOfTheWeek = '$day'");
+    echo json_encode($fetch);
+}
+
+if(isset($_GET['group'])){
+    $group = $_GET['group'];
+    $fetch  = $crud->fetch_data("select * from students where courseCode = '$group'");
+    echo json_encode($fetch);
 }
 
 

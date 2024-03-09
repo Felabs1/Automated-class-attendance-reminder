@@ -18,7 +18,7 @@
                     <h3>Courses</h3>
                     <hr>
                     <a href="add_course.php" class="w3-button w3-purple w3-round">Add Course</a>
-                    <button class="w3-button w3-purple w3-round">Manage Course</button>
+                    <a href="manage_course.php" class="w3-button w3-purple w3-round">Manage Course</a>
                 </div>
                 
             </div>

@@ -1,3 +1,14 @@
+<?php
+session_start();
+include("./backend/crud.php");
+$crud = new Crud("127.0.0.1", "root", "", "acar");
+$fetch = $crud->fetch_data("SELECT * FROM unitregistration");
+$course = $crud->fetch_data("SELECT * from courseregistration");
+
+// echo $_SESSION['phone'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,18 +26,33 @@
             <h3>create reminder</h3>
             <hr>
             <label for="">unit</label>
-            <input class="w3-input w3-border w3-round" name="unit" id="unit"/>
+            <select class="w3-input w3-border w3-round" name="unit" id="unit">
+                <?php
+                foreach($fetch as $row2){
+                    ?>
+                        <option value="<?php echo $row2['unitCode'];  ?>"><?php echo $row2["unitName"]; ?></option>
+                    <?php
+                }
+                
+                ?>
+            </select>
             <label for="">time</label>
-            <input class="w3-input w3-border w3-round" name="time" id="time"/>
+            <input class="w3-input w3-border w3-round" type="time" name="time" id="time"/>
             <label for="">venue</label>
             <input class="w3-input w3-border w3-round" name="venue" id="venue"/>
             <label for="">group</label>
-            <select name="group" id="group">
-                <option value="ccs">Computer Science</option>
-                <option value="tmc">Mathematics & computer science</option>
+            <select class="w3-select w3-border w3-round" name="group" id="group">
+                <?php 
+                    foreach($course as $row){
+                        ?>
+                <option value="<?php echo $row['courseCode']; ?>"><?php echo $row['courseName']; ?></option>
+                        
+                        <?php
+                    }
+                ?>
             </select>
             <label for="">day of the week</label>
-            <select id="day_of_the_week" name="day_of_the_week">
+            <select class="w3-select w3-border w3-round" id="day_of_the_week" name="day_of_the_week">
                 <option value="monday">Monday</option>
                 <option value="tuesday">Tuesday</option>
                 <option value="wednesday">Wednesday</option>
