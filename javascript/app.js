@@ -52,7 +52,6 @@ function register() {
 
   // comunicating with the server
 
-  console.log("what is happening");
   let request = new XMLHttpRequest();
   request.open("POST", "./backend/connection.php?registerStudent=true", true);
   // console.log(request);
@@ -178,7 +177,7 @@ function addUnit() {
     if (this.readyState == 4 && this.status == 200) {
       console.log(this.responseText);
       if (this.responseText == "unit_code_exist") {
-        alert("the course code allready exist");
+        alert("the unit code allready exist");
       } else if (this.responseText == "successfull") {
         alert("course registered successfully");
       } else {
@@ -250,5 +249,99 @@ function addReminder() {
 
   let form = document.getElementById("reminder");
   let formData = new FormData(form);
+  request.send(formData);
+}
+
+function registerLecturer() {
+  var email = document.getElementById("email");
+  var admission = document.getElementById("admission");
+  var password = document.getElementById("password");
+  var names = document.getElementById("names");
+  var phoneNumber = document.getElementById("phoneNumber");
+
+  if (email.value == "") {
+    alert("please enter email");
+    return;
+  }
+
+  if (password.value == "") {
+    alert("please enter the password");
+    return;
+  }
+
+  if (names.value == "") {
+    alert("please enter the lecturers names");
+    return;
+  }
+
+  if (phoneNumber.value == "") {
+    alert("please enter the phone number");
+    return;
+  }
+
+  var request = new XMLHttpRequest();
+  request.open("POST", "./backend/connection.php?registerLecturer=true", true);
+  // console.log(request);
+  request.onreadystatechange = function () {
+    // connection to the server is working
+    if (this.readyState == 4 && this.status == 200) {
+      if (this.responseText == "user_exist") {
+        alert("user exist");
+        admission.classList.add("w3-border-red");
+      } else if (this.responseText == "successful") {
+        alert("registration succesful");
+        window.location.href = "./lecturer_login.php";
+      } else {
+        alert("some error occured");
+        console.log(this.responseText);
+      }
+    }
+  };
+
+  let myform = document.getElementById("signupForm");
+  let formData = new FormData(myform);
+  request.send(formData);
+}
+
+function lecturerLogin() {
+  let username = document.getElementById("username");
+  let password = document.getElementById("password");
+
+  // ids to be captured for validation purposes
+  // the validations to be made here
+  if (username.value == "") {
+    alert("please enter a username");
+    username.classList.add("w3-border-red");
+    return;
+  }
+
+  if (password.value == "") {
+    alert("please enter a password");
+    password.classList.add("w3-border-red");
+    return;
+  }
+  // agax xmlHttpRequest
+  let request = new XMLHttpRequest();
+  request.open("POST", "./backend/connection.php?loginLecturer=true");
+  request.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log(this.responseText);
+      if (this.responseText == "login_success") {
+        alert("login successful");
+        window.location.href = "./index.php";
+      } else if (this.responseText == "incorrect_password") {
+        alert("please enter the correct password");
+      } else if (this.responseText == "no_user_found") {
+        alert("the admission number you entered does not exist");
+      } else {
+        alert("internal server error");
+        console.log(this.responseText);
+      }
+    }
+  };
+
+  // sending data from the login form
+  let myForm = document.getElementById("frmLogin");
+  let formData = new FormData(myForm);
   request.send(formData);
 }

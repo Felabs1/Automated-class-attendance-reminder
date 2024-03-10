@@ -139,5 +139,49 @@ if(isset($_GET['group'])){
     echo json_encode($fetch);
 }
 
+if(isset($_GET["registerLecturer"])){
+    $email = $_POST['email'];
+    $admission = $_POST['admission'];
+    $password = $_POST['password'];
+    $names = $_POST['names'];
+    $phoneNumber = $_POST['phoneNumber'];
+    $password_hash = password_hash($password, PASSWORD_DEFAULT);
+
+    $fetch = $crud->fetch_data("SELECT * FROM lecturers WHERE email = '$email'");
+    if(count($fetch) > 0){
+        echo "user_exist";
+    }else{
+        $insert = $crud->insert_data("lecturers", ["Names" => $names, "idNo" => $admission, "email" => $email, "phoneNo" => $phoneNumber, "password" => $password_hash]);
+        if($insert){
+            echo "successful";
+        }else{
+            echo "some_error_occured";
+        }
+    }
+}
+
+
+if(isset($_GET["loginLecturer"])){
+    $admission = $_POST['username'];
+    $password = $_POST['password'];
+    $fetch = $crud->fetch_data("select * from lecturers where email = '$admission'");
+    if(count($fetch) > 0){
+        if(password_verify($password,$fetch[0]["password"])){
+            $_SESSION['names'] = $fetch[0]['lectName'];
+            $_SESSION['idNo']  = $fetch[0]["idNo"];
+            $_SESSION['email'] = $fetch[0]["email"];
+            $_SESSION['phoneNo'] = $fetch[0]["phoneNo"];
+            $_SESSION['password']=$fetch[0]['password'];
+            // input other session variables here;
+            echo "login_success";
+        }else{
+            // echo password_hash($password, PASSWORD_DEFAULT);
+            echo "incorrect_password";
+        }
+    }else{
+        echo "no_user_found";
+    }
+}
+
 
 ?>

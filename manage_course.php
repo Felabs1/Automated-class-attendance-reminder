@@ -25,6 +25,26 @@ $fetch = $crud->fetch_data("SELECT * FROM courseregistration");
     <?php require("./navigation.php"); ?>
 <br>
     <div class="w3-auto">
+        
+        <?php  
+            if(isset($_GET['course_code'])){
+                $course_code = $_GET['course_code'];
+                $fetch2 = $crud->fetch_data("select * from courseregistration where courseCode = '$course_code'");
+                ?>
+                <div class="w3-auto" style="width: 30rem">
+                    <form action="">
+                        <label for="">Course Code</label>
+                        <input type="text" class="w3-input w3-border w3-round" value="<?php echo $_GET['course_code']; ?>" />
+                        <label for="">Course Name</label>
+                        <input type="text" class="w3-input w3-border w3-round" value="<?php echo $fetch2[0]["courseName"]; ?>" />
+                        <button class="w3-button w3-border w3-round">Submit</button>
+                    </form>
+            </div>
+            <br>
+                
+                <?php
+            }
+        ?>
         <table class="w3-table w3-bordered">
             <tr>
                 <th>course code</th>
@@ -38,7 +58,7 @@ $fetch = $crud->fetch_data("SELECT * FROM courseregistration");
                  <tr>
                     <td><?php echo $row['courseCode']; ?></td>
                     <td><?php echo $row['courseName']; ?></td>
-                    <td><button class="w3-button w3-padding-small w3-grey w3-round">Edit</button>&nbsp;<button class="w3-button w3-padding-small w3-red w3-round">Delete</button></td>
+                    <td><a href="./manage_course.php?course_code=<?php echo $row['courseCode']; ?>" class="w3-button w3-padding-small w3-grey w3-round">Edit</a>&nbsp;<button class="w3-button w3-padding-small w3-red w3-round">Delete</button></td>
                 </tr>
                 <?php
             }

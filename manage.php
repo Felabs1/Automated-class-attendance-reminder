@@ -36,7 +36,16 @@
                     </h3>
                     <hr>
                     <a href="reminder.php" class="w3-button w3-purple w3-round">Create</a>
-                    <button class="w3-button w3-purple w3-round">Manage Reminder</button>
+                    <a href="manage_reminder.php" class="w3-button w3-purple w3-round">Manage Reminder</a>
+                </div>
+            </div>
+            <div class="w3-col l4">
+                <div class="w3-white w3-round-large w3-padding">
+                    <h3><i class="fa fa-bell w3-text-purple">&nbsp;</i>Lecturers
+                    </h3>
+                    <hr>
+                    <a href="add_lecturer.php" class="w3-button w3-purple w3-round">Add Lecturer</a>
+                    <a href="manage_lecturers.php" class="w3-button w3-purple w3-round">Manage Lecturer</a>
                 </div>
             </div>
         </div>

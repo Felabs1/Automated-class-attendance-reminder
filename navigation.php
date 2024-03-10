@@ -3,7 +3,6 @@
         <span class="w3-large"><span class="w3-hide-small">Automated Class attendance reminder</span>(ACAR)</span>
         <div class="w3-right w3-hide-small" >
             <a href="./index.php" class="w3-bar-item w3-padding"><i class="fa fa-home"></i>&nbsp;Home</a>
-            <a href="./index.php" class="w3-bar-item w3-padding"><i class="fa fa-bell"></i>&nbsp;Notifications</a>
             <a href="./manage.php" class="w3-bar-item w3-padding"><i class="fa fa-cog"></i>&nbsp;Manage</a>
             <a href="./index.php" class="w3-bar-item w3-padding"><i class="fa fa-sign-out"></i>&nbsp;Log out</a>
         </div>

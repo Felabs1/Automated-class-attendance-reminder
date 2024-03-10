@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+include("./backend/crud.php");
+$crud = new Crud("127.0.0.1", "root", "", "acar");
+$fetch = $crud->fetch_data("SELECT * FROM unitregistration");
+// echo $_SESSION['phone'];
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +20,25 @@
 </head>
 <body>
     <?php require("./navigation.php"); ?>
+    <?php
+    if (isset($_GET["unit_code"])) {
+        ?>
+            <form class="w3-auto" style="width: 30rem">
+                <label for="">Unit Code</label>
+                <input type="text" class="w3-input w3-border w3-round" value="<?php echo $_GET["unit_code"] ?>">
+                <label for="">Unit Name</label>
+                <input type="text" class="w3-input w3-border w3-round">
+                <label for="">Course Code</label>
+                <input type="text" class="w3-input w3-border w3-round">
+                <button class="w3-button w3-border w3-round">Save</button>
+            </form>
+        <?php
+    }
+     ?>
     <div class="w3-auto" >
+        
+    <br>
+    <br>
     <table class="w3-table w3-bordered">
             <tr>
                 <th>unit code</th>
@@ -19,12 +47,20 @@
                 <th>action</th>
 
             </tr>
-            <tr>
-                <td>CCS 215</td>
-                <td>software development</td>
-                <td>CCS</td>
-                <td><button class="w3-button w3-padding-small w3-grey w3-round">Edit</button>&nbsp;<button class="w3-button w3-padding-small w3-red w3-round">Delete</button></td>
-            </tr>
+            <?php
+            foreach($fetch as $row){
+                ?>
+                <tr>
+                    <td><?php echo $row["unitCode"]; ?></td>
+                    <td><?php echo $row["unitName"]; ?></td>
+                    <td><?php echo $row["course"]; ?></td>
+                    <td><a href="./manage_unit.php?unit_code=<?php echo $row['unitCode'] ?>" class="w3-button w3-padding-small w3-grey w3-round">Edit</a>&nbsp;<button class="w3-button w3-padding-small w3-red w3-round">Delete</button></td>
+                </tr>
+
+                <?php
+            }
+             ?>
+            
         </table>
 
     </div>
