@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,10 +9,11 @@
     <link rel="stylesheet" type="text/css" href="./css/main.css">
     <title>Document</title>
 </head>
+
 <body>
-    
-    
-     <div class="background-wallpaper" style="position: relative;
+
+
+    <div class="background-wallpaper" style="position: relative;
   background-image: url('./images/loginwallpaper.jpg');
   background-size: cover;
   background-position: center;
@@ -27,28 +29,37 @@
   margin-left: 0px;
   margin-top: 0px;
   margin-bottom: 0px;">
-        <br><br>
-    <br><br>
-    <br><br>
-    <br><br>
-    <br><br>
+            <br><br>
+            <br><br>
+            <br><br>
+            <br><br>
+            <br><br>
             <div class="w3-auto" style="width: 30rem">
-            <form id="frmLogin" class="w3-card w3-round w3-white w3-padding">
-            <h4>Login</h4>
-            <hr>
-            <label for="">username</label>
-            <input type="text" name="username" id="username" class="w3-input w3-border w3-round">
-            <label for="">password</label>
-            <input type="password" name="password" id="password" class="w3-input w3-border w3-round">
-            <br>
-            <button class="w3-button w3-purple w3-block w3-round" type="button" onclick="login()">Login</button>
+                <form id="frmLogin" class="w3-card w3-round w3-white w3-padding">
+                    <h4>Login</h4>
+                    <hr>
+                    <label for="">username</label>
+                    <input type="text" name="username" id="username" class="w3-input w3-border w3-round">
+                    <label for="">password</label>
+                    <input type="password" name="password" id="password" class="w3-input w3-border w3-round">
+                    <br>
+                    <button class="w3-button w3-purple w3-block w3-round" type="button" onclick="login()">Login</button>
+                    <br>
+                    <div class="w3-center">
+                        <p>or </p>
+                        <a href="lecturer_login.php">login as lecturer</a>
+                        <br>
+                    </div>
 
-        </form>
+
+
+                </form>
+            </div>
         </div>
-        </div>
-     </div>
-        
+    </div>
+
     <script src="./javascript/app.js"></script>
-    
+
 </body>
+
 </html>

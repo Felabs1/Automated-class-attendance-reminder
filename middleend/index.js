@@ -1,5 +1,5 @@
-const accountSid = "AC6020b62180c54d0323a02168a3ea5f9f";
-const authToken = "ab5de77de4fcadb6d5d749e2ebe1adb5";
+const accountSid = "AC9ae55301d6aa9508a733bc1ee6958fa1";
+const authToken = "ab05bc451f84f0bd86cd2e781f0d2f54";
 const client = require("twilio")(accountSid, authToken);
 
 const { response } = require("express");
@@ -68,8 +68,8 @@ function makeCall() {
                 client.calls
                   .create({
                     url: "http://127.0.0.1:1337/",
-                    to: `+254111942081`,
-                    from: "+14158586498",
+                    to: `+254731862583`,
+                    from: "+18506162328",
                   })
                   .then((call) => console.log(call.sid));
               });
@@ -80,9 +80,9 @@ function makeCall() {
             ) {
               client.messages
                 .create({
-                  from: "+14158586498",
+                  from: "+18506162328",
                   body: `Dear Felix, you are required to attend a lecture named ${unit} on venue ${venue} at time ${time}`,
-                  to: "+254111942081",
+                  to: "+254731862583",
                 })
                 .then((message) => console.log(message.sid));
             }
@@ -100,10 +100,13 @@ function convertDateStringTo24HourFormat(dateString) {
   });
 }
 
+// 2P69PYKJ1NEMGDEX9M89JHR3   recovery
+
 // console.log(
 //   convertDateStringTo24HourFormat(getTimeThirtyMinutesLater()) == "17:19"
 // );
 // Output: "14:12"
 // makeCall();
-setInterval(makeCall, 3000);
+setInterval(makeCall, 10000);
+
 // console.log();

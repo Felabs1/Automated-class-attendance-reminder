@@ -178,7 +178,7 @@ function addUnit() {
       console.log(this.responseText);
       if (this.responseText == "unit_code_exist") {
         alert("the unit code allready exist");
-      } else if (this.responseText == "successfull") {
+      } else if (this.responseText == "successful") {
         alert("course registered successfully");
       } else {
         alert("internal server error");
@@ -290,7 +290,7 @@ function registerLecturer() {
         admission.classList.add("w3-border-red");
       } else if (this.responseText == "successful") {
         alert("registration succesful");
-        window.location.href = "./lecturer_login.php";
+        window.location.href = window.location.href;
       } else {
         alert("some error occured");
         console.log(this.responseText);
@@ -344,4 +344,132 @@ function lecturerLogin() {
   let myForm = document.getElementById("frmLogin");
   let formData = new FormData(myForm);
   request.send(formData);
+}
+
+function editCourse() {
+  let courseCode = document.getElementById("courseCode");
+  let courseName = document.getElementById("courseName");
+
+  if (courseCode.value == "") {
+    alert("please enter the course code");
+    return;
+  }
+
+  if (courseName.value == "") {
+    alert("please enter the course name to delete");
+    return;
+  }
+
+  let request = new XMLHttpRequest();
+  request.open("POST", "./backend/connection.php?edit_course=true");
+  request.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log(this.responseText);
+      if (this.responseText == "success") {
+        alert("course edited successfully");
+        window.location.href = window.location.href;
+      } else {
+        alert("some error occured when editing");
+      }
+    }
+  };
+
+  let form = document.getElementById("frmEditCourse");
+  let formData = new FormData(form);
+  request.send(formData);
+}
+
+function updateUnit() {
+  const unitName = document.getElementById("unitName");
+  const unitCode = document.getElementById("unitCode");
+  const courseCode = document.getElementById("courseCode");
+
+  if (unitName.value == "") {
+    alert("please enter the unit name");
+    return;
+  }
+
+  if (courseCode.value == "") {
+    alert("please enter the coursee code");
+    return;
+  }
+
+  if (unitCode.value == "") {
+    alert("please enter the unit code");
+    return;
+  }
+
+  let request = new XMLHttpRequest();
+  request.open("POST", "./backend/connection.php?edit_unit=true");
+  request.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log(this.responseText);
+      if (this.responseText == "successful") {
+        alert("unit updated successfully");
+        window.location.href = window.location.href;
+      } else {
+        alert("some error occured");
+      }
+    }
+  };
+
+  let form = document.getElementById("frmUpdateUnit");
+  let formdata = new FormData(form);
+  request.send(formdata);
+}
+
+function editReminder() {
+  var unit = document.getElementById("unit");
+  var time = document.getElementById("time");
+  var venue = document.getElementById("venue");
+  var group = document.getElementById("group");
+  var day_of_the_week = document.getElementById("day_of_the_week");
+
+  // validations
+  if (unit.value == "") {
+    alert("please enter the unit name");
+    unit.classList.add("w3-border-red");
+    return;
+  }
+
+  if (time.value == "") {
+    alert("please enter time");
+    time.classList.add("w3-border-red");
+    return;
+  }
+
+  if (venue.value == "") {
+    alert("please enter venue");
+    venue.classList.add("w3-border-red");
+    return;
+  }
+
+  if (group.value == "") {
+    alert("please enter group");
+    group.classList.add("w3-border-red");
+    return;
+  }
+
+  if (day_of_the_week.value == "") {
+    alert("please enter the day of the week");
+    day_of_the_week.classList.add("w3-border-red");
+    return;
+  }
+
+  let request = new XMLHttpRequest();
+  request.open("POST", "./backend/connection.php?editReminder=true");
+  request.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log(this.responseText);
+      if (this.responseText == "success") {
+        alert("reminder updated successfully");
+        window.location.href = window.location.href;
+      } else {
+        alert("some error occured");
+      }
+    }
+  };
+  let form = document.getElementById("reminder");
+  let formdata = new FormData(form);
+  request.send(formdata);
 }

@@ -1,5 +1,12 @@
+<?php
+session_start();
+if (!isset ($_SESSION["usertype"])) {
+    header("location: ./index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,10 +15,11 @@
     <link rel="stylesheet" type="text/css" href="./index.css">
     <title>Document</title>
 </head>
+
 <body>
-    <?php require("./navigation.php"); ?>
+    <?php require ("./navigation.php"); ?>
     <div class="w3-auto">
-        
+
         <div class="w3-row-padding w3-stretch">
             <div class="w3-col l4">
                 <div class="w3-white w3-round-large w3-padding">
@@ -20,14 +28,14 @@
                     <a href="add_course.php" class="w3-button w3-purple w3-round">Add Course</a>
                     <a href="manage_course.php" class="w3-button w3-purple w3-round">Manage Course</a>
                 </div>
-                
+
             </div>
             <div class="w3-col l4">
                 <div class="w3-white w3-round-large w3-padding">
                     <h3>Units</h3>
                     <hr>
-                    <a href="add_unit.php"class="w3-button w3-purple w3-round">Add Unit</a>
-                    <button class="w3-button w3-purple w3-round">Manage Unit</button>
+                    <a href="add_unit.php" class="w3-button w3-purple w3-round">Add Unit</a>
+                    <a href="manage_unit.php" class="w3-button w3-purple w3-round">Manage Unit</a>
                 </div>
             </div>
             <div class="w3-col l4">
@@ -50,6 +58,7 @@
             </div>
         </div>
     </div>
-    
+
 </body>
+
 </html>
