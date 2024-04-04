@@ -9,7 +9,7 @@ $crud = new Crud("127.0.0.1", "root", "", "acar");
 //     echo "success";
 // }
 
-if (isset ($_GET["registerStudent"])) {
+if (isset($_GET["registerStudent"])) {
 
 
     // initialization of variables that were called from the client
@@ -43,7 +43,7 @@ if (isset ($_GET["registerStudent"])) {
 
 }
 
-if (isset ($_GET['loginStudent'])) {
+if (isset($_GET['loginStudent'])) {
     $admission = $_POST['username'];
     $password = $_POST['password'];
     $fetch = $crud->fetch_data("select * from students where admNo = '$admission'");
@@ -66,7 +66,7 @@ if (isset ($_GET['loginStudent'])) {
     }
 }
 
-if (isset ($_GET["addCourse"])) {
+if (isset($_GET["addCourse"])) {
     $courseCode = $_POST['course_code'];
     $courseName = $_POST['course_name'];
 
@@ -84,7 +84,7 @@ if (isset ($_GET["addCourse"])) {
     }
 }
 
-if (isset ($_GET["addunit"])) {
+if (isset($_GET["addunit"])) {
     $unit_code = $_POST["unit_code"];
     $unit_name = $_POST["unit_name"];
     $course = $_POST["course"];
@@ -105,17 +105,18 @@ if (isset ($_GET["addunit"])) {
 }
 
 
-if (isset ($_GET['addReminder'])) {
+if (isset($_GET['addReminder'])) {
     $unit = $_POST["unit"];
     $time = $_POST["time"];
     $venue = $_POST["venue"];
     $group = $_POST["group"];
+    $email = $_SESSION['email'];
     $day_of_the_week = $_POST["day_of_the_week"];
     $fetch = $crud->fetch_data("select * from reminders where unit = '$unit' and time='$time' and dayOfTheWeek = '$day_of_the_week'");
     if (count($fetch) > 0) {
         echo "lecturers_clashing";
     } else {
-        $sql = "INSERT INTO `reminders`(`unit`, `time`, `venue`, `group`, `dayOfTheWeek`, `lecturer_id`) VALUES ('$unit','$time','$venue','$group','$day_of_the_week','test')";
+        $sql = "INSERT INTO `reminders`(`unit`, `time`, `venue`, `group`, `dayOfTheWeek`, `lecturer_id`) VALUES ('$unit','$time','$venue','$group','$day_of_the_week','$email')";
         if ($crud->conn->query($sql)) {
             echo "successful";
         } else {
@@ -125,7 +126,7 @@ if (isset ($_GET['addReminder'])) {
     }
 }
 
-if (isset ($_GET['day'])) {
+if (isset($_GET['day'])) {
     // echo "{time: 1800}";
     // $time = $_GET['time'];
     $day = $_GET['day'];
@@ -134,13 +135,13 @@ if (isset ($_GET['day'])) {
     echo json_encode($fetch);
 }
 
-if (isset ($_GET['group'])) {
+if (isset($_GET['group'])) {
     $group = $_GET['group'];
     $fetch = $crud->fetch_data("select * from students where courseCode = '$group'");
     echo json_encode($fetch);
 }
 
-if (isset ($_GET["registerLecturer"])) {
+if (isset($_GET["registerLecturer"])) {
     $email = $_POST['email'];
     $admission = $_POST['admission'];
     $password = $_POST['password'];
@@ -162,7 +163,7 @@ if (isset ($_GET["registerLecturer"])) {
 }
 
 
-if (isset ($_GET["loginLecturer"])) {
+if (isset($_GET["loginLecturer"])) {
     $admission = $_POST['username'];
     $password = $_POST['password'];
     $fetch = $crud->fetch_data("select * from lecturers where email = '$admission'");
@@ -185,7 +186,7 @@ if (isset ($_GET["loginLecturer"])) {
     }
 }
 
-if (isset ($_GET["edit_course"])) {
+if (isset($_GET["edit_course"])) {
     $courseName = $_POST["courseName"];
     $courseCode = $_POST["courseCode"];
 
@@ -201,7 +202,7 @@ if (isset ($_GET["edit_course"])) {
     }
 }
 
-if (isset ($_GET["edit_unit"])) {
+if (isset($_GET["edit_unit"])) {
     $unitName = $_POST["unitName"];
     $unitCode = $_POST["unitCode"];
     $courseCode = $_POST["courseCode"];
@@ -214,7 +215,7 @@ if (isset ($_GET["edit_unit"])) {
     }
 }
 
-if (isset ($_GET["deleteReminder"])) {
+if (isset($_GET["deleteReminder"])) {
     echo "delete can now happen";
     $deleteId = $_GET["deleteReminder"];
     $delete = $crud->delete_data("delete from reminders where reminder_id = '$deleteId'");
@@ -226,7 +227,7 @@ if (isset ($_GET["deleteReminder"])) {
     }
 }
 
-if (isset ($_GET["deleteUnit"])) {
+if (isset($_GET["deleteUnit"])) {
     echo "unit can now be deleted";
     $deleteId = $_GET["deleteUnit"];
     $fetch = $crud->fetch_data("select * from reminders where unit = '$deleteId'");
@@ -247,7 +248,7 @@ if (isset ($_GET["deleteUnit"])) {
     }
 }
 
-if (isset ($_GET["deleteCourse"])) {
+if (isset($_GET["deleteCourse"])) {
     echo "course deletion can now happen here";
     $deleteId = $_GET["deleteCourse"];
     $fetch = $crud->fetch_data("select * from unitregistration where course = '$deleteId'");
@@ -267,7 +268,7 @@ if (isset ($_GET["deleteCourse"])) {
     }
 }
 
-if (isset ($_GET["editReminder"])) {
+if (isset($_GET["editReminder"])) {
 
     $unit = $_POST["unit"];
     $time = $_POST["time"];
@@ -276,7 +277,7 @@ if (isset ($_GET["editReminder"])) {
     $day_of_the_week = $_POST["day_of_the_week"];
     $reminder_id = $_POST["reminderId"];
 
-    $sql = "UPDATE `reminders` SET `unit`='$unit',`time`='$time',`venue`='$venue',`group`='$group',`dayOfTheWeek`='$day_of_the_week',`lecturer_id`='test' WHERE `reminder_id` = '$reminder_id'";
+    $sql = "UPDATE `reminders` SET `unit`='$unit',`time`='$time',`venue`='$venue',`group`='$group',`dayOfTheWeek`='$day_of_the_week' WHERE `reminder_id` = '$reminder_id'";
     $result = $crud->conn->query($sql);
     if ($result) {
         echo "successful";
@@ -285,7 +286,7 @@ if (isset ($_GET["editReminder"])) {
     }
 }
 
-if (isset ($_GET["deleteLecturer"])) {
+if (isset($_GET["deleteLecturer"])) {
     $lecturerId = $_GET["deleteLecturer"];
     $delete = $crud->delete_data("delete from lecturers where email = '$lecturerId'");
     if ($delete) {

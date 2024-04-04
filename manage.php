@@ -21,23 +21,41 @@ if (!isset ($_SESSION["usertype"])) {
     <div class="w3-auto">
 
         <div class="w3-row-padding w3-stretch">
-            <div class="w3-col l4">
-                <div class="w3-white w3-round-large w3-padding">
-                    <h3>Courses</h3>
-                    <hr>
-                    <a href="add_course.php" class="w3-button w3-purple w3-round">Add Course</a>
-                    <a href="manage_course.php" class="w3-button w3-purple w3-round">Manage Course</a>
-                </div>
+            <?php
+            if ($_SESSION["usertype"] == "admin") {
+                ?>
+                <div class="w3-col l4">
+                    <div class="w3-white w3-round-large w3-padding">
+                        <h3>Courses</h3>
+                        <hr>
+                        <a href="add_course.php" class="w3-button w3-purple w3-round">Add Course</a>
+                        <a href="manage_course.php" class="w3-button w3-purple w3-round">Manage Course</a>
+                    </div>
 
-            </div>
-            <div class="w3-col l4">
-                <div class="w3-white w3-round-large w3-padding">
-                    <h3>Units</h3>
-                    <hr>
-                    <a href="add_unit.php" class="w3-button w3-purple w3-round">Add Unit</a>
-                    <a href="manage_unit.php" class="w3-button w3-purple w3-round">Manage Unit</a>
                 </div>
-            </div>
+                <div class="w3-col l4">
+                    <div class="w3-white w3-round-large w3-padding">
+                        <h3>Units</h3>
+                        <hr>
+                        <a href="add_unit.php" class="w3-button w3-purple w3-round">Add Unit</a>
+                        <a href="manage_unit.php" class="w3-button w3-purple w3-round">Manage Unit</a>
+                    </div>
+                </div>
+                <div class="w3-col l4">
+                    <div class="w3-white w3-round-large w3-padding">
+                        <h3><i class="fa fa-bell w3-text-purple">&nbsp;</i>Lecturers
+                        </h3>
+                        <hr>
+                        <a href="add_lecturer.php" class="w3-button w3-purple w3-round">Add Lecturer</a>
+                        <a href="manage_lecturers.php" class="w3-button w3-purple w3-round">Manage Lecturer</a>
+                    </div>
+                </div>
+                <?php
+            }
+
+            ?>
+
+
             <div class="w3-col l4">
                 <div class="w3-white w3-round-large w3-padding">
                     <h3><i class="fa fa-bell w3-text-purple">&nbsp;</i>Reminder
@@ -47,15 +65,7 @@ if (!isset ($_SESSION["usertype"])) {
                     <a href="manage_reminder.php" class="w3-button w3-purple w3-round">Manage Reminder</a>
                 </div>
             </div>
-            <div class="w3-col l4">
-                <div class="w3-white w3-round-large w3-padding">
-                    <h3><i class="fa fa-bell w3-text-purple">&nbsp;</i>Lecturers
-                    </h3>
-                    <hr>
-                    <a href="add_lecturer.php" class="w3-button w3-purple w3-round">Add Lecturer</a>
-                    <a href="manage_lecturers.php" class="w3-button w3-purple w3-round">Manage Lecturer</a>
-                </div>
-            </div>
+
         </div>
     </div>
 

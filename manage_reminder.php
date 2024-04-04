@@ -1,12 +1,13 @@
 <?php
 session_start();
 include ("./backend/crud.php");
+$lecturerId = $_SESSION['email'];
 $crud = new Crud("127.0.0.1", "root", "", "acar");
-$fetch = $crud->fetch_data("SELECT * FROM reminders");
+$fetch = $crud->fetch_data("SELECT * FROM reminders where lecturer_id = '$lecturerId'");
 $fetch3 = $crud->fetch_data("SELECT * FROM unitregistration");
 $course = $crud->fetch_data("SELECT * FROM courseregistration");
 // echo $_SESSION['phone'];
-if (!isset ($_SESSION["usertype"])) {
+if (!isset($_SESSION["usertype"])) {
     header("location: ./index.php");
 }
 ?>
@@ -34,13 +35,13 @@ if (!isset ($_SESSION["usertype"])) {
     <div class="w3-auto">
 
         <?php
-        if (isset ($_GET['reminder_id'])) {
+        if (isset($_GET['reminder_id'])) {
             $course_code = $_GET['reminder_id'];
             $fetch2 = $crud->fetch_data("select * from reminders where reminder_id = '$course_code'");
             ?>
             <div class="w3-auto" style="width: 30rem">
                 <form id="reminder" class="w3-white w3-padding w3-round-large">
-                    <h3>create reminder</h3>
+                    <h3>Edit reminder</h3>
                     <hr>
                     <input type="hidden" name="reminderId" value="<?php echo $_GET["reminder_id"]; ?>">
                     <label for="">unit</label>
@@ -90,7 +91,7 @@ if (!isset ($_SESSION["usertype"])) {
                     <input class="w3-input w3-border w3-round" name="unit_name" id="unit_name"/> -->
                     <br>
                     <br>
-                    <button class="w3-button w3-purple w3-round" type="button" onclick="editReminder()">Add</button>
+                    <button class="w3-button w3-purple w3-round" type="button" onclick="editReminder()">Update</button>
                 </form>
             </div>
             <br>

@@ -47,6 +47,9 @@
                     <br>
                     <div class="w3-center">
                         <p>or </p>
+                        <a href="signup.php">register</a>
+                        <p>or </p>
+
                         <a href="lecturer_login.php">login as lecturer</a>
                         <br>
                     </div>

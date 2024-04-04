@@ -6,6 +6,8 @@ $crud = new Crud("127.0.0.1", "root", "", "acar");
 if (!isset ($_SESSION['email'])) {
     header("location: ./login.php");
 }
+$email = $_SESSION['email'];
+// echo $courseCode;
 
 ?>
 
@@ -25,16 +27,35 @@ if (!isset ($_SESSION['email'])) {
     <?php require ("./navigation.php"); ?>
     <br>
     <div class="w3-auto">
-        <h1 style="font-weight: bold">Good Evening, <span class="w3-text-purple">
+        <h1 style="font-weight: bold">
+            <?php
+            date_default_timezone_set('Africa/Nairobi');
+            $hour = date('H');
+            // echo $hour;
+            
+            if ($hour >= 6 && $hour < 12) {
+                echo "Good morning!";
+            } elseif ($hour >= 12 && $hour < 17) {
+                echo "Good afternoon!";
+            } else {
+                echo "Good evening!";
+            }
+            ?>, <span class="w3-text-purple">
                 <?php echo $_SESSION["fullname"]; ?>
-            </span>?</h1>
+            </span>?
+        </h1>
         <div class="w3-row-padding w3-stretch">
             <div class="w3-col l6">
                 <div class="w3-row-padding">
                     <h3>Todays Schedule,</h3>
                     <?php
+                    if (isset ($_SESSION["admission"])) {
+                        $courseCode = $_SESSION["courseCode"];
 
-                    $fetch = $crud->fetch_data("select * from reminders");
+                        $fetch = $crud->fetch_data("select * from reminders where `group` = '$courseCode'");
+                    } else {
+                        $fetch = $crud->fetch_data("select * from reminders where `lecturer_id` = '$email'");
+                    }
                     foreach ($fetch as $row) {
                         ?>
                         <div class="w3-col l6">
