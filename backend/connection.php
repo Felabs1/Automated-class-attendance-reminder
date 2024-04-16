@@ -9,6 +9,18 @@ $crud = new Crud("127.0.0.1", "root", "", "acar");
 //     echo "success";
 // }
 
+if (isset($_GET['callId'])) {
+    $insert = $crud->insert_data("callerids", ["callhash" => $_GET["callId"]]);
+    if ($insert) {
+        echo "success";
+    }
+}
+
+if (isset($_GET["calls"])) {
+    $fetch = $crud->fetch_data("select * from callerids");
+    echo json_encode($fetch);
+}
+
 if (isset($_GET["registerStudent"])) {
 
 
@@ -267,6 +279,8 @@ if (isset($_GET["deleteCourse"])) {
         }
     }
 }
+
+
 
 if (isset($_GET["editReminder"])) {
 

@@ -1,22 +1,5 @@
 // const accountSid = "AC9ae55301d6aa9508a733bc1ee6958fa1";
 // const authToken = "7c5373f27b0858b238fe504f280bffde";
-const express = require("express");
-const app = express();
-
-app.post("/twilio/callback", (req, res) => {
-  const twiml = new twilio.twiml.VoiceResponse();
-  console.log(req.body.callStatus);
-
-  const callStatus = req.body.CallStatus;
-  if (callStatus === "completed") {
-    // handle successful call here
-  } else if (callStatus === "no-answer" || callStatus === "busy") {
-    // handle call not answered here
-  }
-
-  res.type("text/xml");
-  res.send(twiml.toString());
-});
 
 const accountSid = "AC7280896be37931fe6414c17da43e194a";
 const authToken = "38f85cec95ae3116795abe6845eb1680";
@@ -27,10 +10,8 @@ client.calls
     url: "http://127.0.0.1:1337/twilio/callback",
     to: "+254706263979",
     from: "+12513698804",
-    statusCallback: "/twilio/callback",
-    statusCallbackMethod: "POST",
   })
-  .then((call) => console.log(call));
+  .then((call) => console.log(call.sid));
 
 function getTimeThirtyMinutesLater() {
   const now = new Date();
@@ -88,21 +69,10 @@ function makeCall() {
                 client.calls
                   .create({
                     url: "http://127.0.0.1:1337/twilio/callback",
-                    to: "+254706263979",
-                    from: "+12513698804",
+                    to: `+254731862583`,
+                    from: "+18506162328",
                   })
-                  .then((call) => {
-                    fetch(
-                      "http://localhost:8000/backend/connection.php?callId=" +
-                        call.sid
-                    )
-                      .then((res) => {
-                        return res.text();
-                      })
-                      .then((data) => {
-                        console.log(data);
-                      });
-                  });
+                  .then((call) => console.log(call.sid));
               });
             }
 
@@ -111,9 +81,9 @@ function makeCall() {
             ) {
               client.messages
                 .create({
-                  from: "+12513698804",
+                  from: "+18506162328",
                   body: `Dear Felix, you are required to attend a lecture named ${unit} on venue ${venue} at time ${time}`,
-                  to: "+254706263979",
+                  to: "+254731862583",
                 })
                 .then((message) => console.log(message.sid));
             }
@@ -140,53 +110,6 @@ function convertDateStringTo24HourFormat(dateString) {
 // );
 // Output: "14:12"
 // makeCall();
+// setInterval(makeCall, 10000);
 
-// // console.log();
-
-function callClient() {
-  client.calls
-    .create({
-      url: "http://127.0.0.1:1337/",
-      to: "+254706263979",
-      from: "+12513698804",
-      statusCallback: "/twilio/callback",
-      statusCallbackMethod: "POST",
-    })
-    .then((call) => {
-      fetch("http://localhost:8000/backend/connection.php?callId=" + call.sid)
-        .then((res) => {
-          return res.text();
-        })
-        .then((data) => {
-          console.log(data);
-        });
-    });
-}
-
-function recallClient() {
-  fetch("http://localhost:8000/backend/connection.php?calls=true")
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      console.log(data);
-      data.forEach((element) => {
-        client
-          .calls(element.callhash)
-          .fetch()
-          .then((message) => {
-            const status = message.status;
-            if (
-              status == "busy" ||
-              status == "no-answer" ||
-              status == "failed"
-            ) {
-              callClient();
-            }
-          });
-      });
-    });
-}
-
-setInterval(recallClient, 120000);
-setInterval(makeCall, 10000);
+// console.log();

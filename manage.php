@@ -1,11 +1,11 @@
 <?php
 session_start();
-if (!isset ($_SESSION["usertype"])) {
+if (!isset($_SESSION["usertype"])) {
     header("location: ./index.php");
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<hr lang="en">
 
 <head>
     <meta charset="UTF-8">
